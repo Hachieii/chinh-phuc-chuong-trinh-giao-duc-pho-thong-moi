@@ -26,7 +26,7 @@ export default function LessonCard({
     <Link href={linkTo}>
       <Card
         x-chunk="dashboard-01-chunk-0"
-        className="hover:bg-primary-foreground max-w-md h-full flex items-stretch"
+        className="hover:bg-primary-foreground h-full flex items-stretch"
       >
         <CardHeader>
           <CardTitle className="flex flex-row items-center space-y-0 pb-2 gap-4">

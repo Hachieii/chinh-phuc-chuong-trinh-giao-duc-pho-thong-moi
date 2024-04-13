@@ -18,21 +18,22 @@ export default function ChapterList({
 }) {
   return (
     <>
-      <div className="container">
-        <h2 className="font-bold flex justify-center text-5xl py-20">
-          {nthChapter}. {title}
+      <div className="flex flex-col">
+        <h2 className="font-bold text-4xl py-16">
+          {`CHƯƠNG ${nthChapter}: ${title}`}
         </h2>
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap gap-6">
           {lessonList.map((lesson) => {
             return (
-              <LessonCard
-                key={lesson.id}
-                linkTo={lesson.linkTo}
-                nthLesson={lesson.nthLesson}
-                title={lesson.title}
-                context={lesson.context}
-                isDone={lesson.isDone}
-              />
+              <div className="w-[27%] min-w-72" key={lesson.id}>
+                <LessonCard
+                  linkTo={lesson.linkTo}
+                  nthLesson={lesson.nthLesson}
+                  title={lesson.title}
+                  context={lesson.context}
+                  isDone={lesson.isDone}
+                />
+              </div>
             );
           })}
         </div>
