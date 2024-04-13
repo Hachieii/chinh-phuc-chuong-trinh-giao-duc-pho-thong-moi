@@ -1,10 +1,12 @@
 import LessonCard from "./lessonCard";
 
 export default function ChapterList({
+  pref,
   nthChapter,
   title,
   lessonList,
 }: {
+  pref: string;
   nthChapter: string;
   title: string;
   lessonList: {
@@ -20,7 +22,7 @@ export default function ChapterList({
     <>
       <div className="flex flex-col">
         <h2 className="font-bold text-4xl py-16">
-          {`CHƯƠNG ${nthChapter}: ${title}`}
+          {`${pref} ${nthChapter}: ${title}`}
         </h2>
         <div className="flex flex-wrap gap-6">
           {lessonList.map((lesson) => {
