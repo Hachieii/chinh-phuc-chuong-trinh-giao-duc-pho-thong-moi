@@ -3,6 +3,7 @@ import ChapterList from "@/components/chapter";
 import LessonCard from "@/components/lessonCard";
 import Navbar from "@/components/navbar";
 import NavbarAuth from "@/components/navbarAuthen";
+import SubjectProgress from "@/components/subjectProgress";
 // lessonList: {
 //   id: number;
 //   linkTo: string;
