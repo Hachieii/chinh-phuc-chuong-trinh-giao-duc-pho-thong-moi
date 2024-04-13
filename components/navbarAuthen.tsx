@@ -24,6 +24,8 @@ import {
 } from "./ui/dropdown-menu";
 
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const subjects: { id: number; link: string; name: string; linkName: string }[] =
   [
@@ -47,7 +49,7 @@ const IsActive = (path: string) => {
   return false;
 };
 
-export default function Navbar() {
+export default function NavbarAuth({ imageLink }: { imageLink: string }) {
   return (
     <>
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -140,19 +142,27 @@ export default function Navbar() {
             </div>
           </form>
           <ModeToggle />
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
+                <Avatar>
+                  <AvatarImage src={imageLink} />
+                  <AvatarFallback>
+                    <CircleUser className="h-5 w-5" />
+                  </AvatarFallback>
+                </Avatar>
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <Link href="/api/auth/signin">
-                <DropdownMenuItem>Login</DropdownMenuItem>
-              </Link>
-              <Link href="/api/auth/signin">
-                <DropdownMenuItem>Sign up</DropdownMenuItem>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <Link href="/api/auth/signout">
+                <DropdownMenuItem>Log out</DropdownMenuItem>
               </Link>
             </DropdownMenuContent>
           </DropdownMenu>
