@@ -37,18 +37,13 @@ import { auth } from "@/auth";
 import SubjectProgress from "@/components/subjectProgress";
 
 import db from "@/drizzle/db";
-import { lessonCompleted, users } from "@/drizzle/schema";
-import { and, count, eq } from "drizzle-orm";
+import { lessonCompleted, memo, users } from "@/drizzle/schema";
+import { and, count, desc, eq } from "drizzle-orm";
+import MemoCard from "@/components/memoCard";
 
 async function totCompleted(name: string) {
   const session = await auth();
   if (!session?.user) return 0;
-
-  // await db.insert(lessonCompleted).values({
-  //   userId: session?.user?.id as string,
-  //   subject: name,
-  //   title: "bai 1",
-  // });
 
   const completed = await db
     .select()
@@ -63,12 +58,38 @@ async function totCompleted(name: string) {
   return completed.length;
 }
 
+async function getMemo(name: string) {
+  const session = await auth();
+  if (!session?.user) return [];
+
+  const res = await db
+    .select({
+      id: memo.id,
+      subject: memo.subject,
+      title: memo.title,
+      context: memo.context,
+      createdAt: memo.createdAt,
+    })
+    .from(memo)
+    .where(
+      and(eq(memo.userId, session?.user?.id as string), eq(memo.subject, name))
+    )
+    .orderBy(desc(memo.createdAt));
+
+  return res;
+}
+
 export default async function Dashboard() {
   const session = await auth();
   const isLogin = !!session?.user;
   if (!isLogin) {
     return redirect("/api/auth/signin");
   }
+
+  const tableToan = await getMemo("toan");
+  const tableLy = await getMemo("ly");
+  const tableHoa = await getMemo("hoa");
+  const tableTin = await getMemo("tin");
 
   return (
     <>
@@ -132,9 +153,10 @@ export default async function Dashboard() {
             <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
               <CardHeader className="flex flex-row items-center">
                 <div className="grid gap-2">
-                  <CardTitle>Transactions</CardTitle>
+                  <CardTitle>Lưu trữ</CardTitle>
                   <CardDescription>
-                    Recent transactions from your store.
+                    Những ghi nhớ gần đây đã lưu. (Khi xóa cần tải lại trang để
+                    áp dụng)
                   </CardDescription>
                 </div>
                 <Button asChild size="sm" className="ml-auto gap-1">
@@ -144,6 +166,19 @@ export default async function Dashboard() {
                   </Link>
                 </Button>
               </CardHeader>
+              {tableToan.map((card, i) => {
+                return (
+                  <CardContent key={i}>
+                    <MemoCard
+                      id={card.id as string}
+                      subject={card.subject as string}
+                      title={card.title as string}
+                      context={card.context as string}
+                      createdAt={card.createdAt as Date}
+                    />
+                  </CardContent>
+                );
+              })}
             </Card>
             <Card x-chunk="dashboard-01-chunk-5">
               <CardHeader>

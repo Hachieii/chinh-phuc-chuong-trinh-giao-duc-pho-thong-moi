@@ -18,6 +18,20 @@ import { Button } from "./ui/button";
 
 import { Save } from "lucide-react";
 import addNewMemo from "@/lib/addNewMemo";
+import { toast } from "sonner";
+import ToggleMessage from "./message";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function Important({
   children,
@@ -43,7 +57,22 @@ export default function Important({
               <Tooltip>
                 <TooltipTrigger>
                   <Button type="submit">
-                    <Save />
+                    <AlertDialog>
+                      <AlertDialogTrigger>
+                        <Save />
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>{title}</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            {children}
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogAction>Xác nhận</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>Thêm vào mục lưu trữ</TooltipContent>

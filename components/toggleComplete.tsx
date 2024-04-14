@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import updateCompletedLesson from "@/lib/updateCompletedLesson";
 import { redirect } from "next/navigation";
 import { Button } from "./ui/button";
+import ToggleMessage from "./message";
 
 export default async function ToggleComplete({
   subjectName,
@@ -25,6 +26,7 @@ export default async function ToggleComplete({
         }}
       >
         <Button type="submit">Hoàn thành</Button>
+        <ToggleMessage message="Tạo ghi nhớ thành công" />;
       </form>
     </>
   );
