@@ -35,7 +35,7 @@ const subjects: { id: number; link: string; name: string; linkName: string }[] =
 
 const navItems: { id: number; link: string; name: string; linkName: string }[] =
   [
-    { id: 1, link: "/dashboard", name: "Trang chính", linkName: "dashboard" },
+    { id: 1, link: "/dashboard", name: "Thông kê", linkName: "dashboard" },
     { id: 2, link: "/thu-vien", name: "Thư viện", linkName: "thu-vien" },
   ];
 

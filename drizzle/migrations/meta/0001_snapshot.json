@@ -1,6 +1,6 @@
 {
-  "id": "3af0273e-fff5-49d6-b8b5-22428c0547d1",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "cc5794da-2dd2-4730-a293-63c10f77d18f",
+  "prevId": "3af0273e-fff5-49d6-b8b5-22428c0547d1",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -121,6 +121,12 @@
         },
         "title": {
           "name": "title",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subject": {
+          "name": "subject",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true

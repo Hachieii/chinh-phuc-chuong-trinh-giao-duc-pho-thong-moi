@@ -488,6 +488,7 @@ export default async function Page() {
           return (
             <div key={chapter.id} className="py-16">
               <ChapterList
+                subject="tin"
                 pref="CHỦ ĐỀ"
                 title={chapter.title}
                 nthChapter={chapter.nthChapter}

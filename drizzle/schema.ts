@@ -1,9 +1,13 @@
+import { Many, relations } from "drizzle-orm";
 import {
   timestamp,
   pgTable,
   text,
   primaryKey,
   integer,
+  varchar,
+  uuid,
+  unique,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "next-auth/adapters";
 
@@ -14,6 +18,33 @@ export const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 });
+
+export const lessonCompleted = pgTable(
+  "lessonCompleted",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    title: varchar("title", { length: 256 }).notNull(),
+    subject: varchar("subject", { length: 256 }).notNull(),
+    completedAt: timestamp("completedAt").defaultNow(),
+  },
+  (t) => ({
+    unq: unique().on(t.userId, t.title),
+  })
+);
+
+export const usersRelations = relations(users, ({ many }) => ({
+  lessonCompleted: many(lessonCompleted),
+}));
+
+export const lessonRelations = relations(lessonCompleted, ({ one }) => ({
+  users: one(users, {
+    fields: [lessonCompleted.userId],
+    references: [users.id],
+  }),
+}));
 
 export const accounts = pgTable(
   "account",

@@ -1,0 +1,2 @@
+ALTER TABLE "lessonCompleted" DROP CONSTRAINT "lessonCompleted_title_unique";--> statement-breakpoint
+ALTER TABLE "lessonCompleted" ADD CONSTRAINT "lessonCompleted_userId_title_unique" UNIQUE("userId","title");

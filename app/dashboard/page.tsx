@@ -36,6 +36,33 @@ import NavbarAuth from "@/components/navbarAuthen";
 import { auth } from "@/auth";
 import SubjectProgress from "@/components/subjectProgress";
 
+import db from "@/drizzle/db";
+import { lessonCompleted, users } from "@/drizzle/schema";
+import { and, count, eq } from "drizzle-orm";
+
+async function totCompleted(name: string) {
+  const session = await auth();
+  if (!session?.user) return 0;
+
+  // await db.insert(lessonCompleted).values({
+  //   userId: session?.user?.id as string,
+  //   subject: name,
+  //   title: "bai 1",
+  // });
+
+  const completed = await db
+    .select()
+    .from(lessonCompleted)
+    .where(
+      and(
+        eq(lessonCompleted.userId, session?.user?.id as string),
+        eq(lessonCompleted.subject, name)
+      )
+    );
+
+  return completed.length;
+}
+
 export default async function Dashboard() {
   const session = await auth();
   const isLogin = !!session?.user;
@@ -52,26 +79,26 @@ export default async function Dashboard() {
             <SubjectProgress
               title="Toán"
               type="Lý thuyết"
-              completed={0}
-              total={100}
+              completed={await totCompleted("toan")}
+              total={33}
             />
             <SubjectProgress
               title="Lý"
               type="Lý thuyết"
-              completed={0}
-              total={100}
+              completed={await totCompleted("ly")}
+              total={26}
             />
             <SubjectProgress
               title="Hóa"
               type="Lý thuyết"
-              completed={0}
-              total={100}
+              completed={await totCompleted("hoa")}
+              total={25}
             />
             <SubjectProgress
               title="Tin"
               type="Lý thuyết"
-              completed={0}
-              total={100}
+              completed={await totCompleted("tin")}
+              total={49}
             />
           </div>
 

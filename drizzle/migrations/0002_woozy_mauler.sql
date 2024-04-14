@@ -1,0 +1,1 @@
+ALTER TABLE "lessonCompleted" ADD CONSTRAINT "lessonCompleted_title_unique" UNIQUE("title");

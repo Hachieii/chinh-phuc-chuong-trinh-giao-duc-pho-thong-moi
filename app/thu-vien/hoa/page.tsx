@@ -274,6 +274,7 @@ export default async function Page() {
           return (
             <div key={chapter.id} className="py-16">
               <ChapterList
+                subject="hoa"
                 pref="CHƯƠNG"
                 title={chapter.title}
                 nthChapter={chapter.nthChapter}

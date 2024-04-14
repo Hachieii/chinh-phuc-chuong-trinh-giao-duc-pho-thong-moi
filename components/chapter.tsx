@@ -1,11 +1,14 @@
+import checkIfExist from "@/lib/checkIfExist";
 import LessonCard from "./lessonCard";
 
-export default function ChapterList({
+export default async function ChapterList({
+  subject,
   pref,
   nthChapter,
   title,
   lessonList,
 }: {
+  subject: string;
   pref: string;
   nthChapter: string;
   title: string;
@@ -18,6 +21,10 @@ export default function ChapterList({
     isDone: boolean;
   }[];
 }) {
+  // lessonList.forEach(async (lesson) => {
+  //   lesson.isDone = await checkIfExist(title, lesson.title);
+  // });
+
   return (
     <>
       <div className="flex flex-col">
@@ -25,7 +32,7 @@ export default function ChapterList({
           {`${pref} ${nthChapter}: ${title}`}
         </h2>
         <div className="flex flex-wrap gap-6">
-          {lessonList.map((lesson) => {
+          {lessonList.map(async (lesson) => {
             return (
               <div className="w-[27%] min-w-72" key={lesson.id}>
                 <LessonCard
@@ -33,7 +40,7 @@ export default function ChapterList({
                   nthLesson={lesson.nthLesson}
                   title={lesson.title}
                   context={lesson.context}
-                  isDone={lesson.isDone}
+                  isDone={await checkIfExist(subject, lesson.title)}
                 />
               </div>
             );

@@ -1,0 +1,1 @@
+ALTER TABLE "lessonCompleted" ADD COLUMN "subject" varchar(256) NOT NULL;

@@ -27,7 +27,7 @@ const data = [
         nthLesson: "1",
         context: "To do",
         isDone: false,
-        linkTo: "#",
+        linkTo: "/thu-vien/toan/gia-tri-luong-giac-cua-goc-luong-giac",
       },
       {
         id: 2,
@@ -359,6 +359,7 @@ export default async function Page() {
           return (
             <div key={chapter.id} className="py-16">
               <ChapterList
+                subject="toan"
                 pref="CHƯƠNG"
                 title={chapter.title}
                 nthChapter={chapter.nthChapter}
