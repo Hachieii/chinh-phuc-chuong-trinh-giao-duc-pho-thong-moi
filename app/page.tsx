@@ -49,18 +49,7 @@ export default async function Home() {
       {!isLogin && <Navbar />}
       {isLogin && <NavbarAuth imageLink={session?.user?.image as string} />}
       {JSON.stringify(session?.user, null, 9)}
-      <div className="container">
-        <ChapterList
-          nthChapter="1"
-          title="chuong dau tien"
-          lessonList={lessonList}
-        />
-        <ChapterList
-          nthChapter="2"
-          title="chuong tiep theo"
-          lessonList={lessonList}
-        />
-      </div>
+      <div className="container"></div>
     </>
   );
 }
