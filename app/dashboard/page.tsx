@@ -72,7 +72,8 @@ async function getMemo(name: string) {
     })
     .from(memo)
     .where(
-      and(eq(memo.userId, session?.user?.id as string), eq(memo.subject, name))
+      // and(eq(memo.userId, session?.user?.id as string), eq(memo.subject, name))
+      and(eq(memo.userId, session?.user?.id as string))
     )
     .orderBy(desc(memo.createdAt));
 
@@ -87,9 +88,9 @@ export default async function Dashboard() {
   }
 
   const tableToan = await getMemo("toan");
-  const tableLy = await getMemo("ly");
-  const tableHoa = await getMemo("hoa");
-  const tableTin = await getMemo("tin");
+  // const tableLy = await getMemo("ly");
+  // const tableHoa = await getMemo("hoa");
+  // const tableTin = await getMemo("tin");
 
   return (
     <>
