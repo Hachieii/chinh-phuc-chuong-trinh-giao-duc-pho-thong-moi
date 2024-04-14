@@ -1,0 +1,1 @@
+ALTER TABLE "memo" ADD COLUMN "subject" varchar(256) NOT NULL;

@@ -35,13 +35,32 @@ export const lessonCompleted = pgTable(
   })
 );
 
+export const memo = pgTable("memo", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  subject: varchar("subject", { length: 256 }).notNull(),
+  title: varchar("title", { length: 256 }).notNull(),
+  context: text("context"),
+  createdAt: timestamp("createdAt").defaultNow(),
+});
+
 export const usersRelations = relations(users, ({ many }) => ({
   lessonCompleted: many(lessonCompleted),
+  memo: many(memo),
 }));
 
 export const lessonRelations = relations(lessonCompleted, ({ one }) => ({
   users: one(users, {
     fields: [lessonCompleted.userId],
+    references: [users.id],
+  }),
+}));
+
+export const memoRelations = relations(memo, ({ one }) => ({
+  users: one(users, {
+    fields: [memo.userId],
     references: [users.id],
   }),
 }));

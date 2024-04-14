@@ -29,6 +29,20 @@
       "when": 1713075162852,
       "tag": "0003_white_nitro",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1713113316788,
+      "tag": "0004_nifty_amphibian",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1713113474557,
+      "tag": "0005_striped_wildside",
+      "breakpoints": true
     }
   ]
 }

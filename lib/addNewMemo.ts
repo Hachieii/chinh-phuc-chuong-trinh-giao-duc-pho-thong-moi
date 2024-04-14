@@ -1,24 +1,23 @@
 import { auth } from "@/auth";
 import db from "@/drizzle/db";
-import { lessonCompleted } from "@/drizzle/schema";
+import { memo } from "@/drizzle/schema";
 import { redirect } from "next/navigation";
 
-export default async function updateCompletedLesson(
+export default async function addNewMemo(
   subjectName: string,
-  title: string
+  title: string,
+  context: string
 ) {
   const session = await auth();
   if (!session?.user) return redirect("/api/auth/signin");
 
-  // console.log(subjectName);
-  // console.log(title);
-
   await db
-    .insert(lessonCompleted)
+    .insert(memo)
     .values({
       userId: session?.user?.id as string,
       subject: subjectName,
       title: title,
+      context: context,
     })
     .onConflictDoNothing();
 }
