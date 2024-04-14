@@ -26,6 +26,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Home } from "lucide-react";
 
 const subjects: { id: number; link: string; name: string; linkName: string }[] =
   [
@@ -58,7 +59,7 @@ export default function NavbarAuth({ imageLink }: { imageLink: string }) {
             href="#"
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
-            <Package2 className="h-6 w-6" />
+            <Home className="h-6 w-6 mx-6" />
           </Link>
           {navItems.map((item) => {
             return (
@@ -90,10 +91,10 @@ export default function NavbarAuth({ imageLink }: { imageLink: string }) {
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
               <Link
-                href="#"
+                href="/"
                 className="flex items-center gap-2 text-lg font-semibold md:text-base"
               >
-                <Package2 className="h-6 w-6" />
+                <Home className="h-6 w-6" />
               </Link>
               {navItems.map((item) => {
                 return (
