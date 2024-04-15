@@ -58,7 +58,7 @@ async function totCompleted(name: string) {
   return completed.length;
 }
 
-async function getMemo(name: string) {
+async function getMemo() {
   const session = await auth();
   if (!session?.user) return [];
 
@@ -75,7 +75,8 @@ async function getMemo(name: string) {
       // and(eq(memo.userId, session?.user?.id as string), eq(memo.subject, name))
       and(eq(memo.userId, session?.user?.id as string))
     )
-    .orderBy(desc(memo.createdAt));
+    .orderBy(desc(memo.createdAt))
+    .limit(5);
 
   return res;
 }
@@ -87,7 +88,7 @@ export default async function Dashboard() {
     return redirect("/api/auth/signin");
   }
 
-  const tableToan = await getMemo("toan");
+  const tableAll = await getMemo();
   // const tableLy = await getMemo("ly");
   // const tableHoa = await getMemo("hoa");
   // const tableTin = await getMemo("tin");
@@ -123,9 +124,9 @@ export default async function Dashboard() {
               total={49}
             />
           </div>
-
+          {/* 
           <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-            {/* <SubjectProgress
+            <SubjectProgress
               title="Toán"
               type="Bài tập"
               completed={0}
@@ -148,26 +149,43 @@ export default async function Dashboard() {
               type="Bài tập"
               completed={0}
               total={100}
-            /> */}
-          </div>
-          <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-            <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
+            />
+          </div> */}
+          <div className="grid gap-4 md:gap-8">
+            <Card className="xl:col-span-2">
               <CardHeader className="flex flex-row items-center">
                 <div className="grid gap-2">
                   <CardTitle>Lưu trữ</CardTitle>
                   <CardDescription>
-                    Những ghi nhớ gần đây đã lưu. (Khi xóa cần tải lại trang để
-                    áp dụng)
+                    Những ghi nhớ gần đây đã lưu.
                   </CardDescription>
                 </div>
-                <Button asChild size="sm" className="ml-auto gap-1">
-                  <Link href="#">
-                    View All
-                    <ArrowUpRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button size="sm" className="ml-auto gap-1">
+                      Xem tất cả
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Chọn môn</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <Link href="dashboard/toan">
+                      <DropdownMenuItem>Toán</DropdownMenuItem>
+                    </Link>
+                    <Link href="dashboard/toan">
+                      <DropdownMenuItem>Lý</DropdownMenuItem>
+                    </Link>
+                    <Link href="dashboard/toan">
+                      <DropdownMenuItem>Hóa</DropdownMenuItem>
+                    </Link>
+                    <Link href="dashboard/toan">
+                      <DropdownMenuItem>Tin</DropdownMenuItem>
+                    </Link>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </CardHeader>
-              {tableToan.map((card, i) => {
+              {tableAll.map((card, i) => {
                 return (
                   <CardContent key={i}>
                     <MemoCard

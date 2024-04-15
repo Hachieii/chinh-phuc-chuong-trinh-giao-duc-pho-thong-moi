@@ -22,6 +22,7 @@ import {
 
 import { Trash2 } from "lucide-react";
 import deleteMemo from "@/lib/deleteMemo";
+import { redirect } from "next/navigation";
 
 export default function MemoCard({
   id,
@@ -80,6 +81,7 @@ export default function MemoCard({
                   action={async () => {
                     "use server";
                     await deleteMemo(id);
+                    redirect("/dashboard");
                   }}
                 >
                   <AlertDialogCancel>Hủy</AlertDialogCancel>
