@@ -26,7 +26,7 @@ const data = [
         id: 1,
         title: "Giá trị lượng giác của góc lượng giác",
         nthLesson: "1",
-        context: "To do",
+        context: "",
         isDone: false,
         linkTo: "/thu-vien/toan/gia-tri-luong-giac-cua-goc-luong-giac",
       },
@@ -371,7 +371,7 @@ export default async function Page() {
         })}
       </div>
 
-      <Image src="Picture1" alt="image" />
+      <Image src="/Picture1.png" alt="image" width={397} height={40} />
     </>
   );
 }

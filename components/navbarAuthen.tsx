@@ -40,6 +40,7 @@ const navItems: { id: number; link: string; name: string; linkName: string }[] =
   [
     { id: 1, link: "/dashboard", name: "Thống kê", linkName: "dashboard" },
     { id: 2, link: "/thu-vien", name: "Thư viện", linkName: "thu-vien" },
+    { id: 3, link: "/bai-tap", name: "Bài tập", linkName: "bai-tap" },
   ];
 
 const IsActive = (path: string) => {
@@ -66,7 +67,7 @@ export default function NavbarAuth({ imageLink }: { imageLink: string }) {
               <Link
                 href={item.link}
                 key={item.id}
-                className={`flex items-center gap-2 text-lg font-semibold md:text-base ${
+                className={`flex items-center gap-2 text-lg font-semibold md:text-base min-w-[30%] z-10 ${
                   IsActive(item.linkName)
                     ? "hover:text-foreground border-b-2 border-foreground"
                     : "text-muted-foreground hover:text-foreground"

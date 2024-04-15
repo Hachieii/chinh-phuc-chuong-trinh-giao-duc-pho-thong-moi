@@ -33,12 +33,12 @@ import {
 import { type CarouselApi } from "@/components/ui/carousel";
 
 type Question = {
-  questitle: string;
+  quesTitle: string;
   ans1: [string, boolean];
   ans2: [string, boolean];
   ans3: [string, boolean];
   ans4: [string, boolean];
-  resson: string;
+  reason: string;
 };
 
 function Cards({ data }: { data: Question[] }) {
@@ -69,7 +69,7 @@ function Cards({ data }: { data: Question[] }) {
                 <Card>
                   <CardHeader className="flex flex-col gap-6">
                     <CardTitle className="text-4xl font-bold">
-                      {question.questitle}
+                      {question.quesTitle}
                     </CardTitle>
 
                     <CardDescription className="flex flex-col gap-6">
@@ -101,13 +101,13 @@ function Cards({ data }: { data: Question[] }) {
                           <AlertDialogTitle>Đáp án:</AlertDialogTitle>
                           <AlertDialogDescription className="space-y-6">
                             <p>
-                              {question.ans1[1] ? question.ans1[0] : ""}
-                              {question.ans2[1] ? question.ans2[0] : ""}
-                              {question.ans3[1] ? question.ans3[0] : ""}
-                              {question.ans4[1] ? question.ans4[0] : ""}
+                              {question.ans1[1] ? question.ans1[0] + " " : ""}
+                              {question.ans2[1] ? question.ans2[0] + " " : ""}
+                              {question.ans3[1] ? question.ans3[0] + " " : ""}
+                              {question.ans4[1] ? question.ans4[0] + " " : ""}
                             </p>
 
-                            <p>{question.resson}</p>
+                            <p>{question.reason}</p>
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>

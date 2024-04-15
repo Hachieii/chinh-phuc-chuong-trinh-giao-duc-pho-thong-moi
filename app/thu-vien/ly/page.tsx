@@ -25,9 +25,9 @@ const data = [
         id: 1,
         nthLesson: "1",
         title: "Dao động điều hòa",
-        context: "To do",
+        context: "",
         isDone: false,
-        linkTo: "#",
+        linkTo: "/thu-vien/ly/dao-dong-dieu-hoa",
       },
       {
         id: 2,
