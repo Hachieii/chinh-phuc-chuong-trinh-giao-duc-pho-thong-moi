@@ -3,6 +3,7 @@ import ChapterList from "@/components/chapter";
 import ListSubjects from "@/components/listsubjects";
 import Navbar from "@/components/navbar";
 import NavbarAuth from "@/components/navbarAuthen";
+import Image from "next/image";
 
 // id: number
 // nthChapter: string,
@@ -369,6 +370,8 @@ export default async function Page() {
           );
         })}
       </div>
+
+      <Image src="Picture1" alt="image" />
     </>
   );
 }

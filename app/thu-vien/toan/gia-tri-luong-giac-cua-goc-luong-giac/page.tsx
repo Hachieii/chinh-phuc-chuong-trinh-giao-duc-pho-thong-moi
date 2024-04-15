@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { auth } from "@/auth";
 import Important from "@/components/important";
 import ListSubjects from "@/components/listsubjects";
