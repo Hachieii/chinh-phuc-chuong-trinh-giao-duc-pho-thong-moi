@@ -31,7 +31,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export function Component() {
+function Component() {
   return (
     <Card>
       <CardHeader>
