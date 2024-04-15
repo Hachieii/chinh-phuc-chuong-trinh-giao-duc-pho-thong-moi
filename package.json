@@ -39,6 +39,7 @@
     "dotenv": "^16.4.5",
     "dotenv-extended": "^2.9.0",
     "drizzle-orm": "^0.30.8",
+    "embla-carousel-react": "^8.0.2",
     "framer-motion": "^11.0.28",
     "katex": "^0.16.10",
     "lucide-react": "^0.367.0",

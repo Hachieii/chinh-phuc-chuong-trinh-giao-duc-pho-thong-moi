@@ -10,11 +10,6 @@ export default async function ToggleComplete({
   subjectName: string;
   title: string;
 }) {
-  const session = await auth();
-  const isLogin = !!session?.user;
-
-  if (!isLogin) return await redirect("/api/auth/signin");
-
   return (
     <>
       <form
