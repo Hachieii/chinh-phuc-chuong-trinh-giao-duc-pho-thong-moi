@@ -26,7 +26,7 @@ const data = [
         id: 1,
         nthLesson: "1",
         title: "Bên trong máy tính",
-        context: "To do",
+        context: "",
         isDone: false,
         linkTo: "/thu-vien/tin/ben-trong-may-tinh",
       },
