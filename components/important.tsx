@@ -44,43 +44,45 @@ export default function Important({
 }) {
   return (
     <>
-      <Card className="border-solid py-6">
-        <CardContent className="text-[20px]">{children}</CardContent>
-        <CardFooter className="flex justify-end">
-          <form
-            action={async () => {
-              "use server";
-              await addNewMemo(subjectName, title, children as string);
-            }}
-          >
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Button type="submit">
-                    <AlertDialog>
-                      <AlertDialogTrigger>
-                        <Save />
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>{title}</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            {children}
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogAction>Xác nhận</AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Thêm vào mục lưu trữ</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </form>
-        </CardFooter>
-      </Card>
+      <div className="py-8">
+        <Card className="border-solid py-6">
+          <CardContent className="text-[20px]">{children}</CardContent>
+          <CardFooter className="flex justify-end">
+            <form
+              action={async () => {
+                "use server";
+                await addNewMemo(subjectName, title, children as string);
+              }}
+            >
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Button type="submit">
+                      <AlertDialog>
+                        <AlertDialogTrigger>
+                          <Save />
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>{title}</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              {children}
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogAction>Xác nhận</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Thêm vào mục lưu trữ</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </form>
+          </CardFooter>
+        </Card>
+      </div>
     </>
   );
 }

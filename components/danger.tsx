@@ -16,15 +16,19 @@ export default function DangerContent({
 }) {
   return (
     <>
-      <Card className="bg-destructive">
-        <CardHeader>
-          <CardTitle className="flex">
-            <CircleAlert />
-            <div className="mx-3">Chú ý!</div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>{children}</CardContent>
-      </Card>
+      <div className="py-8">
+        <Card className="bg-destructive">
+          <CardHeader>
+            <CardTitle className="flex">
+              <CircleAlert />
+              <div className="mx-3">Chú ý!</div>
+            </CardTitle>
+            <CardDescription className="text-primary font-bold text-md">
+              {children}
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
     </>
   );
 }
