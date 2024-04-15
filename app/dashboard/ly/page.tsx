@@ -1,17 +1,6 @@
 import Link from "next/link";
-import {
-  Activity,
-  ArrowUpRight,
-  CircleUser,
-  CreditCard,
-  DollarSign,
-  Menu,
-  Package2,
-  Search,
-  Users,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,35 +17,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { redirect } from "next/navigation";
 import NavbarAuth from "@/components/navbarAuthen";
 
 import { auth } from "@/auth";
-import SubjectProgress from "@/components/subjectProgress";
 
 import db from "@/drizzle/db";
-import { lessonCompleted, memo, users } from "@/drizzle/schema";
-import { and, count, desc, eq } from "drizzle-orm";
+import { memo } from "@/drizzle/schema";
+import { and, desc, eq } from "drizzle-orm";
 import MemoCard from "@/components/memoCard";
-
-async function totCompleted(name: string) {
-  const session = await auth();
-  if (!session?.user) return 0;
-
-  const completed = await db
-    .select()
-    .from(lessonCompleted)
-    .where(
-      and(
-        eq(lessonCompleted.userId, session?.user?.id as string),
-        eq(lessonCompleted.subject, name)
-      )
-    );
-
-  return completed.length;
-}
 
 async function getMemo(name: string) {
   const session = await auth();

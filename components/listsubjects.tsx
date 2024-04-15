@@ -1,27 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "./theme-toggle";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
-import { Input } from "./ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { CircleUser, Menu, Package2, Search } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
 
 const subjects: { id: number; link: string; name: string; linkName: string }[] =
   [

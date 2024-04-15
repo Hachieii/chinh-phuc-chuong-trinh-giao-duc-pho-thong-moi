@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import updateCompletedLesson from "@/lib/updateCompletedLesson";
 import { redirect } from "next/navigation";
 import { Button } from "./ui/button";
