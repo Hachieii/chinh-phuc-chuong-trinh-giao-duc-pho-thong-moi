@@ -208,7 +208,7 @@ export default async function Dashboard() {
                 <CardTitle>Lịch sử bài tập</CardTitle>
               </CardHeader>
               <CardContent className="grid gap-8">
-                <LinkCard
+                {/* <LinkCard
                   linkTo="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                   title="Hóa cao cấp"
                 />
@@ -219,7 +219,7 @@ export default async function Dashboard() {
                 <LinkCard
                   linkTo="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                   title="Lý thuyết dây"
-                />
+                /> */}
               </CardContent>
             </Card>
           </div>
