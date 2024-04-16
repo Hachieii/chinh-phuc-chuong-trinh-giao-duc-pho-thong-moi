@@ -8,7 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CongPhaTHPTQG",
+  title: "Chinh phục chương trình giáo dục phổ thông mới",
   description: "",
 };
 
