@@ -143,9 +143,9 @@ export default function Navbar() {
               <Link href="/api/auth/signin">
                 <DropdownMenuItem>Login</DropdownMenuItem>
               </Link>
-              <Link href="/api/auth/signin">
+              {/* <Link href="/api/auth/signin">
                 <DropdownMenuItem>Sign up</DropdownMenuItem>
-              </Link>
+              </Link> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

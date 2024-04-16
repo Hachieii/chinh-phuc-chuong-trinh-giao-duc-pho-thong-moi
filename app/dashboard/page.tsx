@@ -160,13 +160,13 @@ export default async function Dashboard() {
                     <Link href="dashboard/toan">
                       <DropdownMenuItem>Toán</DropdownMenuItem>
                     </Link>
-                    <Link href="dashboard/toan">
+                    <Link href="dashboard/ly">
                       <DropdownMenuItem>Lý</DropdownMenuItem>
                     </Link>
-                    <Link href="dashboard/toan">
+                    <Link href="dashboard/hoa">
                       <DropdownMenuItem>Hóa</DropdownMenuItem>
                     </Link>
-                    <Link href="dashboard/toan">
+                    <Link href="dashboard/tin">
                       <DropdownMenuItem>Tin</DropdownMenuItem>
                     </Link>
                   </DropdownMenuContent>

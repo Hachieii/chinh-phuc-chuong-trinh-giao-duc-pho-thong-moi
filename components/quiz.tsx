@@ -137,7 +137,7 @@ export default function Quiz({ data }: { data: Question[] }) {
       {!quizStarted ? (
         <>
           <h1 className="text-4xl font-bold text-center">
-            Bạn đã sẵn sàng để làm quiz kiểm tra?
+            Đã đến lúc kiểm tra những gì bạn đã học.
           </h1>
           <div className="flex flex-wrap justify-center pt-16 gap-16">
             <Button
