@@ -56,7 +56,7 @@ export default async function Dashboard() {
     return redirect("/api/auth/signin");
   }
 
-  const tableTin = await getMemo("tin");
+  const tableAnh = await getMemo("anh");
 
   return (
     <>
@@ -68,7 +68,7 @@ export default async function Dashboard() {
               <CardHeader className="flex flex-row items-center">
                 <div className="grid gap-2">
                   <CardTitle>Lưu trữ</CardTitle>
-                  <CardDescription>Tin</CardDescription>
+                  <CardDescription>Anh</CardDescription>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -110,7 +110,7 @@ export default async function Dashboard() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </CardHeader>
-              {tableTin.map((card, i) => {
+              {tableAnh.map((card, i) => {
                 return (
                   <CardContent key={i}>
                     <MemoCard

@@ -46,6 +46,15 @@ export const memo = pgTable("memo", {
   createdAt: timestamp("createdAt").defaultNow(),
 });
 
+export const otherLinks = pgTable("otherLinks", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  title: varchar("title", { length: 256 }).notNull(),
+  linkTo: text("linkTo").notNull(),
+  badge: varchar("badge", { length: 256 }).notNull(),
+  subject: varchar("subject", { length: 256 }).notNull(),
+  topic: varchar("topic", { length: 256 }),
+});
+
 export const usersRelations = relations(users, ({ many }) => ({
   lessonCompleted: many(lessonCompleted),
   memo: many(memo),

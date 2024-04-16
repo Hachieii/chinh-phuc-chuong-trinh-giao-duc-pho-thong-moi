@@ -92,6 +92,21 @@ export default async function Dashboard() {
                     <Link href="/dashboard/tin">
                       <DropdownMenuItem>Tin</DropdownMenuItem>
                     </Link>
+                    <Link href="/dashboard/anh">
+                      <DropdownMenuItem>Anh</DropdownMenuItem>
+                    </Link>
+                    <Link href="/dashboard/van">
+                      <DropdownMenuItem>Văn</DropdownMenuItem>
+                    </Link>
+                    <Link href="/dashboard/su">
+                      <DropdownMenuItem>Sử</DropdownMenuItem>
+                    </Link>
+                    <Link href="/dashboard/dia">
+                      <DropdownMenuItem>Địa</DropdownMenuItem>
+                    </Link>
+                    <Link href="/dashboard/sinh">
+                      <DropdownMenuItem>Sinh</DropdownMenuItem>
+                    </Link>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </CardHeader>

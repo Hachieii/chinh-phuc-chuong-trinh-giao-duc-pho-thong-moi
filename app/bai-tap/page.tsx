@@ -28,7 +28,6 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function Component({ subjectName }: { subjectName: string }) {
-  if (subjectName !== "ly" && subjectName != "tat-ca") return <></>;
   return (
     <Card>
       <CardHeader>
@@ -50,23 +49,25 @@ function Component({ subjectName }: { subjectName: string }) {
           </TableHeader>
           <TableBody>
             {/*  */}
-            <TableRow>
-              <TableCell className="font-medium">
-                Chuyên Đề Vận Dụng Cao Dao Động Điều Hòa
-              </TableCell>
-              <TableCell>
-                <a href="https://www.scribd.com/document/453671689/Tailieupro-com-Chuyen-%C4%90%E1%BB%81-V%E1%BA%ADn-D%E1%BB%A5ng-Cao-Dao-%C4%90%E1%BB%99ng-%C4%90i%E1%BB%81u-Hoa-pdf">
-                  <p className="underline">Link</p>
-                </a>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">Lý</TableCell>
-              <TableCell className="hidden md:table-cell">
-                Dao động điều hòa
-              </TableCell>
-              <TableCell className="hidden md:table-cell">
-                <Badge variant="destructive">Vận dụng cao</Badge>
-              </TableCell>
-            </TableRow>
+            {(subjectName === "ly" || subjectName === "tat-ca") && (
+              <TableRow>
+                <TableCell className="font-medium">
+                  Chuyên Đề Vận Dụng Cao Dao Động Điều Hòa
+                </TableCell>
+                <TableCell>
+                  <a href="https://www.scribd.com/document/453671689/Tailieupro-com-Chuyen-%C4%90%E1%BB%81-V%E1%BA%ADn-D%E1%BB%A5ng-Cao-Dao-%C4%90%E1%BB%99ng-%C4%90i%E1%BB%81u-Hoa-pdf">
+                    <p className="underline">Link</p>
+                  </a>
+                </TableCell>
+                <TableCell className="hidden md:table-cell">Lý</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  Dao động điều hòa
+                </TableCell>
+                <TableCell className="hidden md:table-cell">
+                  <Badge variant="destructive">Vận dụng cao</Badge>
+                </TableCell>
+              </TableRow>
+            )}
             {/*  */}
           </TableBody>
         </Table>
@@ -92,6 +93,11 @@ export default async function Page() {
             <TabsTrigger value="ly">Lý</TabsTrigger>
             <TabsTrigger value="hoa">Hóa</TabsTrigger>
             <TabsTrigger value="tin">Tin</TabsTrigger>
+            <TabsTrigger value="anh">Anh</TabsTrigger>
+            <TabsTrigger value="van">Văn</TabsTrigger>
+            <TabsTrigger value="su">Sử</TabsTrigger>
+            <TabsTrigger value="dia">Địa</TabsTrigger>
+            <TabsTrigger value="sinh">Sinh</TabsTrigger>
           </TabsList>
           <TabsContent value="tat-ca">
             <Component subjectName="tat-ca" />
@@ -107,6 +113,21 @@ export default async function Page() {
           </TabsContent>
           <TabsContent value="tin">
             <Component subjectName="tin" />
+          </TabsContent>
+          <TabsContent value="anh">
+            <Component subjectName="anh" />
+          </TabsContent>
+          <TabsContent value="van">
+            <Component subjectName="van" />
+          </TabsContent>
+          <TabsContent value="su">
+            <Component subjectName="su" />
+          </TabsContent>
+          <TabsContent value="dia">
+            <Component subjectName="dia" />
+          </TabsContent>
+          <TabsContent value="sinh">
+            <Component subjectName="sinh" />
           </TabsContent>
         </Tabs>
       </main>

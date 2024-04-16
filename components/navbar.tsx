@@ -22,11 +22,21 @@ const subjects: { id: number; link: string; name: string; linkName: string }[] =
     { id: 2, link: "/thu-vien/ly", name: "Lý", linkName: "ly" },
     { id: 3, link: "/thu-vien/hoa", name: "Hóa", linkName: "hoa" },
     { id: 4, link: "/thu-vien/tin", name: "Tin", linkName: "tin" },
+    { id: 5, link: "/thu-vien/anh", name: "Anh", linkName: "anh" },
+    { id: 6, link: "/thu-vien/van", name: "Văn", linkName: "van" },
+    { id: 7, link: "/thu-vien/su", name: "Sử", linkName: "su" },
+    { id: 8, link: "/thu-vien/dia", name: "Địa", linkName: "dia" },
+    { id: 9, link: "/thu-vien/sinh", name: "Sinh", linkName: "sinh" },
   ];
 
 const navItems: { id: number; link: string; name: string; linkName: string }[] =
   [
-    { id: 1, link: "/dashboard", name: "Thông kê", linkName: "dashboard" },
+    {
+      id: 1,
+      link: "/dashboard",
+      name: "Bảng điều khiển",
+      linkName: "dashboard",
+    },
     { id: 2, link: "/thu-vien", name: "Thư viện", linkName: "thu-vien" },
     { id: 3, link: "/bai-tap", name: "Bài tập", linkName: "bai-tap" },
   ];
