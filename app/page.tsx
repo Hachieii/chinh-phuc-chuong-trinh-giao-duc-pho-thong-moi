@@ -14,7 +14,7 @@ export default async function Home() {
       {isLogin && <NavbarAuth imageLink={session?.user?.image as string} />} */}
       <div className="container py-[20%]">
         <h1 className="text-7xl font-bold text-center">
-          Công phá THPT Quốc gia
+          Chinh phục chương trình giáo dục phổ thông mới
         </h1>
         <div className="flex flex-wrap justify-center pt-16 gap-16">
           <Link href="/api/auth/signin">
