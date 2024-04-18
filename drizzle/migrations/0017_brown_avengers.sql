@@ -1,0 +1,1 @@
+ALTER TABLE "history" ADD CONSTRAINT "history_linkId_unique" UNIQUE("linkId");

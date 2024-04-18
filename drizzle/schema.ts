@@ -8,6 +8,7 @@ import {
   varchar,
   uuid,
   unique,
+  serial,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "next-auth/adapters";
 
@@ -46,18 +47,53 @@ export const memo = pgTable("memo", {
   createdAt: timestamp("createdAt").defaultNow(),
 });
 
-// export const otherLinks = pgTable("otherLinks", {
-//   id: uuid("id").defaultRandom().primaryKey(),
-//   title: varchar("title", { length: 256 }).notNull(),
-//   linkTo: text("linkTo").notNull(),
-//   badge: varchar("badge", { length: 256 }).notNull(),
-//   subject: varchar("subject", { length: 256 }).notNull(),
-//   topic: varchar("topic", { length: 256 }),
-// });
+export const otherLinks = pgTable("otherLinks", {
+  id: text("id").unique().primaryKey(),
+  title: varchar("title", { length: 256 }).notNull(),
+  linkTo: text("linkTo").notNull().unique(),
+  badge: varchar("badge", { length: 256 }).notNull(),
+  subject: varchar("subject", { length: 256 }).notNull(),
+  topic: varchar("topic", { length: 256 }),
+});
+
+export const history = pgTable("history", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  linkId: text("linkId")
+    .notNull()
+    .unique()
+    .references(() => otherLinks.id),
+  linkTo: text("linkTo")
+    .notNull()
+    .unique()
+    .references(() => otherLinks.linkTo, { onDelete: "cascade" }),
+  title: varchar("title")
+    .notNull()
+    .references(() => otherLinks.title, { onDelete: "cascade" }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export const otherLinksRelations = relations(otherLinks, ({ many }) => ({
+  history: many(history),
+}));
+
+export const historyRelations = relations(history, ({ one }) => ({
+  users: one(users, {
+    fields: [history.userId],
+    references: [users.id],
+  }),
+  otherLinks: one(otherLinks, {
+    fields: [history.linkId],
+    references: [otherLinks.id],
+  }),
+}));
 
 export const usersRelations = relations(users, ({ many }) => ({
   lessonCompleted: many(lessonCompleted),
   memo: many(memo),
+  history: many(history),
 }));
 
 export const lessonRelations = relations(lessonCompleted, ({ one }) => ({

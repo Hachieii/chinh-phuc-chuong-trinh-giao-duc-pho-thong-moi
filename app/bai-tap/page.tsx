@@ -2,9 +2,6 @@ import { auth } from "@/auth";
 import Navbar from "@/components/navbar";
 import NavbarAuth from "@/components/navbarAuthen";
 
-import Image from "next/image";
-import { MoreHorizontal } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,8 +23,54 @@ import {
 } from "@/components/ui/table";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import db from "@/drizzle/db";
+import { otherLinks, history } from "@/drizzle/schema";
+import { eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
-function Component({ subjectName }: { subjectName: string }) {
+async function getData(subjectName: string) {
+  if (subjectName != "tat-ca")
+    return await db.select().from(otherLinks).where(
+      // and(eq(memo.userId, session?.user?.id as string), eq(memo.subject, name))
+      eq(otherLinks.subject, subjectName)
+    );
+  return await db.select().from(otherLinks);
+}
+
+async function updateData(id: string, title: string, linkTo: string) {
+  const session = await auth();
+  if (!session?.user) return;
+
+  await db
+    .insert(history)
+    .values({
+      linkId: id,
+      userId: session?.user?.id as string,
+      linkTo: linkTo,
+      title: title,
+    })
+    .onConflictDoUpdate({
+      target: history.id,
+      set: { createdAt: new Date() },
+    });
+}
+
+async function Component({ subjectName }: { subjectName: string }) {
+  const datas = await getData(subjectName);
+
+  const realName = {
+    toan: "Toán",
+    ly: "Lý",
+    hoa: "Hóa",
+    tin: "Tin",
+    anh: "Anh",
+    van: "Văn",
+    su: "Sử",
+    dia: "Địa",
+    sinh: "Sinh",
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -49,25 +92,43 @@ function Component({ subjectName }: { subjectName: string }) {
           </TableHeader>
           <TableBody>
             {/*  */}
-            {(subjectName === "ly" || subjectName === "tat-ca") && (
-              <TableRow>
-                <TableCell className="font-medium">
-                  Chuyên Đề Vận Dụng Cao Dao Động Điều Hòa
-                </TableCell>
-                <TableCell>
-                  <a href="https://www.scribd.com/document/453671689/Tailieupro-com-Chuyen-%C4%90%E1%BB%81-V%E1%BA%ADn-D%E1%BB%A5ng-Cao-Dao-%C4%90%E1%BB%99ng-%C4%90i%E1%BB%81u-Hoa-pdf">
-                    <p className="underline">Link</p>
-                  </a>
-                </TableCell>
-                <TableCell className="hidden md:table-cell">Lý</TableCell>
-                <TableCell className="hidden md:table-cell">
-                  Dao động điều hòa
-                </TableCell>
-                <TableCell className="hidden md:table-cell">
-                  <Badge variant="destructive">Vận dụng cao</Badge>
-                </TableCell>
-              </TableRow>
-            )}
+            {datas.map((data, i) => {
+              return (
+                <TableRow key={i}>
+                  <TableCell className="font-medium">{data.title}</TableCell>
+                  <TableCell>
+                    <form
+                      action={async () => {
+                        "use server";
+                        await updateData(data.id, data.title, data.linkTo);
+                        redirect(data.linkTo);
+                      }}
+                    >
+                      <Button type="submit">Đi đến</Button>
+                    </form>
+                    {/* <Link href={data.linkTo}>
+                      <Button
+                        onClick={async () => {
+                          "use server";
+                          await updateData(data.id, data.title, data.linkTo);
+                        }}
+                      >
+                        Đi đến
+                      </Button>
+                    </Link> */}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {realName[data.subject as keyof object]}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {data.topic}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    <Badge variant="destructive">{data.badge}</Badge>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
             {/*  */}
           </TableBody>
         </Table>
@@ -86,7 +147,7 @@ export default async function Page() {
       {!isLogin && <Navbar />}
       {isLogin && <NavbarAuth imageLink={session?.user?.image as string} />}
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-        <Tabs defaultValue="toan" className="w-full">
+        <Tabs defaultValue="tat-ca" className="w-full">
           <TabsList>
             <TabsTrigger value="tat-ca">Tất cả</TabsTrigger>
             <TabsTrigger value="toan">Toán</TabsTrigger>

@@ -1,0 +1,1 @@
+ALTER TABLE "history" ALTER COLUMN "createdAt" SET NOT NULL;

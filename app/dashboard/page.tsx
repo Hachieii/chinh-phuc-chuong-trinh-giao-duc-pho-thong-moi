@@ -24,7 +24,7 @@ import { auth } from "@/auth";
 import SubjectProgress from "@/components/subjectProgress";
 
 import db from "@/drizzle/db";
-import { lessonCompleted, memo } from "@/drizzle/schema";
+import { lessonCompleted, memo, history } from "@/drizzle/schema";
 import { and, desc, eq } from "drizzle-orm";
 import MemoCard from "@/components/memoCard";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -70,6 +70,14 @@ async function getMemo() {
   return res;
 }
 
+async function getData() {
+  const session = await auth();
+  return await db
+    .select()
+    .from(history)
+    .where(eq(history.userId, session?.user?.id as string));
+}
+
 export default async function Dashboard() {
   const session = await auth();
   const isLogin = !!session?.user;
@@ -78,6 +86,7 @@ export default async function Dashboard() {
   }
 
   const tableAll = await getMemo();
+  const datas = await getData();
   // const tableLy = await getMemo("ly");
   // const tableHoa = await getMemo("hoa");
   // const tableTin = await getMemo("tin");
@@ -220,6 +229,11 @@ export default async function Dashboard() {
                   linkTo="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                   title="Lý thuyết dây"
                 /> */}
+                {datas.map((data, i) => {
+                  return (
+                    <LinkCard key={i} linkTo={data.linkTo} title={data.title} />
+                  );
+                })}
               </CardContent>
             </Card>
           </div>
