@@ -34,7 +34,7 @@ const navItems: { id: number; link: string; name: string; linkName: string }[] =
     {
       id: 1,
       link: "/dashboard",
-      name: "Bảng điều khiển",
+      name: "Trang chính",
       linkName: "dashboard",
     },
     { id: 2, link: "/thu-vien", name: "Thư viện", linkName: "thu-vien" },
