@@ -64,18 +64,43 @@ async function getMemo() {
       // and(eq(memo.userId, session?.user?.id as string), eq(memo.subject, name))
       and(eq(memo.userId, session?.user?.id as string))
     )
-    .orderBy(memo.createdAt)
+    .orderBy(desc(memo.createdAt))
     .limit(5);
 
   return res;
 }
 
+interface historyType {
+  id: string;
+  title: string;
+  linkTo: string;
+  userId: string;
+  linkId: string;
+  createdAt: Date;
+}
+
 async function getData() {
   const session = await auth();
-  return await db
+  // return await db
+  //   .selectDistinctOn([history.linkTo])
+  //   .from(history)
+  //   .where(eq(history.userId, session?.user?.id as string));
+  // // .orderBy(desc(history.createdAt));
+
+  const res = await db
     .select()
     .from(history)
     .where(eq(history.userId, session?.user?.id as string));
+
+  res.sort((a: historyType, b: historyType) => {
+    return -a.createdAt.getTime() + b.createdAt.getTime();
+  });
+  const unique = new Set();
+  return res.filter((value: historyType) => {
+    if (unique.has(value.linkTo)) return false;
+    unique.add(value.linkTo);
+    return true;
+  });
 }
 
 export default async function Dashboard() {
