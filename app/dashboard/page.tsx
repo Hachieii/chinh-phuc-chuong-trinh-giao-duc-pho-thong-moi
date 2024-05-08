@@ -64,7 +64,7 @@ async function getMemo() {
       // and(eq(memo.userId, session?.user?.id as string), eq(memo.subject, name))
       and(eq(memo.userId, session?.user?.id as string))
     )
-    .orderBy(desc(memo.createdAt))
+    .orderBy(memo.createdAt)
     .limit(5);
 
   return res;
@@ -216,7 +216,7 @@ export default async function Dashboard() {
               <CardHeader>
                 <CardTitle>Lịch sử bài tập</CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-8">
+              <CardContent className="flex flex-col gap-8">
                 {/* <LinkCard
                   linkTo="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                   title="Hóa cao cấp"

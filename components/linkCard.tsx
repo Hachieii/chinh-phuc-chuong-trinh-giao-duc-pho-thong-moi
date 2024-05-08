@@ -9,6 +9,12 @@ import {
   CardTitle,
 } from "./ui/card";
 
+function textShrink(s: string) {
+  const mxSize = 60;
+  if (s.length <= mxSize) return s;
+  return s.slice(0, mxSize - 1) + "...";
+}
+
 export default function LinkCard({
   linkTo,
   title,
@@ -19,10 +25,10 @@ export default function LinkCard({
   return (
     <>
       <a href={linkTo}>
-        <Card className="hover:bg-accent flex flex-row justify-between">
+        <Card className="hover:bg-accent flex flex-row">
           <CardHeader>
             <CardTitle>{title}</CardTitle>
-            <CardDescription>{linkTo}</CardDescription>
+            <CardDescription>{textShrink(linkTo)}</CardDescription>
           </CardHeader>
         </Card>
       </a>
