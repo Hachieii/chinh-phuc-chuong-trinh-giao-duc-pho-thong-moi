@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import Navbar from "@/components/navbar";
 import NavbarAuth from "@/components/navbarAuthen";
 
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,6 +28,7 @@ import { otherLinks, history } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Badge from "@/components/badge";
 
 async function getData(subjectName: string) {
   if (subjectName != "tat-ca")
@@ -124,7 +125,8 @@ async function Component({ subjectName }: { subjectName: string }) {
                     {data.topic}
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    <Badge variant="destructive">{data.badge}</Badge>
+                    {/* <Badge variant="destructive">{data.badge}</Badge> */}
+                    <Badge difficulty={data.badge as string} />
                   </TableCell>
                 </TableRow>
               );
