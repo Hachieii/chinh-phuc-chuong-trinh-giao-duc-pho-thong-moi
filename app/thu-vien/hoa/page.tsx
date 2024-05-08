@@ -269,7 +269,7 @@ export default async function Page() {
       {!isLogin && <Navbar />}
       <ListSubjects />
 
-      <div className="container scale-90">
+      <div className="container">
         {data.map((chapter) => {
           return (
             <div key={chapter.id} className="py-16">

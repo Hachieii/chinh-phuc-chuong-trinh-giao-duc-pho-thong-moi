@@ -12,7 +12,7 @@ export default async function Page() {
       {!isLogin && <Navbar />}
       <ListSubjects />
 
-      <div className="container scale-90"></div>
+      <div className="container"></div>
     </>
   );
 }
