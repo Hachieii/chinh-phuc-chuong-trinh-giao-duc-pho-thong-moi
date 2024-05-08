@@ -27,10 +27,13 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+
+import updateState from "@/lib/updateMemoState";
 
 export default function MemoCard({
   id,
@@ -56,11 +59,11 @@ export default function MemoCard({
 
   return (
     <>
-      <Dialog>
+      <AlertDialog>
         <Card>
           <div className="flex justify-between">
             <CardHeader className="w-full">
-              <DialogTrigger>
+              <AlertDialogTrigger>
                 <Card className="hover:bg-accent min-w-full">
                   <CardHeader className="">
                     <div className="flex flex-col py-6 gap-2">
@@ -76,7 +79,7 @@ export default function MemoCard({
                     </div>
                   </CardHeader>
                 </Card>
-              </DialogTrigger>
+              </AlertDialogTrigger>
             </CardHeader>
 
             <CardFooter className="flex justify-end pr-12">
@@ -114,12 +117,53 @@ export default function MemoCard({
             </CardFooter>
           </div>
 
-          <DialogContent className="scale-125 sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle className="pb-2">{title}</DialogTitle>
-              <DialogDescription>{context}</DialogDescription>
-            </DialogHeader>
-          </DialogContent>
+          <AlertDialogContent className="scale-125 sm:max-w-[425px]">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="pb-2">{title}</AlertDialogTitle>
+              <AlertDialogDescription>{context}</AlertDialogDescription>
+            </AlertDialogHeader>
+            <div className="flex justify-center pt-8">
+              <AlertDialogFooter className="">
+                <form
+                  action={async () => {
+                    "use server";
+                    await updateState(subject, title, "bad");
+                  }}
+                >
+                  <AlertDialogAction type="submit">Mới học</AlertDialogAction>
+                </form>
+
+                <form
+                  action={async () => {
+                    "use server";
+                    await updateState(subject, title, "hard");
+                  }}
+                >
+                  <AlertDialogAction type="submit">
+                    Cần học lại
+                  </AlertDialogAction>
+                </form>
+
+                <form
+                  action={async () => {
+                    "use server";
+                    await updateState(subject, title, "good");
+                  }}
+                >
+                  <AlertDialogAction type="submit">Tốt</AlertDialogAction>
+                </form>
+
+                <form
+                  action={async () => {
+                    "use server";
+                    await updateState(subject, title, "easy");
+                  }}
+                >
+                  <AlertDialogAction type="submit">Dễ</AlertDialogAction>
+                </form>
+              </AlertDialogFooter>
+            </div>
+          </AlertDialogContent>
 
           {/* <CardFooter className="flex justify-end pr-12">
             <AlertDialog>
@@ -153,7 +197,7 @@ export default function MemoCard({
             </AlertDialog>
           </CardFooter> */}
         </Card>
-      </Dialog>
+      </AlertDialog>
     </>
   );
 }

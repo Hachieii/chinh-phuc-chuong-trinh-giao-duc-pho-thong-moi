@@ -26,8 +26,9 @@ import db from "@/drizzle/db";
 import { memo } from "@/drizzle/schema";
 import { and, desc, eq } from "drizzle-orm";
 import MemoCard from "@/components/memoCard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-async function getMemo(name: string) {
+async function getMemo(name: string, state: string) {
   const session = await auth();
   if (!session?.user) return [];
 
@@ -41,7 +42,11 @@ async function getMemo(name: string) {
     })
     .from(memo)
     .where(
-      and(eq(memo.userId, session?.user?.id as string), eq(memo.subject, name))
+      and(
+        eq(memo.userId, session?.user?.id as string),
+        eq(memo.subject, name),
+        eq(memo.state, state)
+      )
       // and(eq(memo.userId, session?.user?.id as string))
     )
     .orderBy(desc(memo.createdAt));
@@ -49,18 +54,29 @@ async function getMemo(name: string) {
   return res;
 }
 
-export default async function Dashboard() {
+async function renderUi(subjectName: string, state: string) {
   const session = await auth();
   const isLogin = !!session?.user;
   if (!isLogin) {
     return redirect("/api/auth/signin");
   }
 
-  const tableHoa = await getMemo("hoa");
+  const realName = {
+    toan: "Toán",
+    ly: "Lý",
+    hoa: "Hóa",
+    tin: "Tin",
+    anh: "Anh",
+    van: "Văn",
+    su: "Sử",
+    dia: "Địa",
+    sinh: "Sinh",
+  };
+
+  const tableTin = await getMemo(subjectName, state);
 
   return (
     <>
-      <NavbarAuth imageLink={session?.user?.image as string} />
       <div className="flex min-h-screen w-full flex-col">
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
           <div className="grid gap-4 md:gap-8">
@@ -68,7 +84,9 @@ export default async function Dashboard() {
               <CardHeader className="flex flex-row items-center">
                 <div className="grid gap-2">
                   <CardTitle>Thẻ nhớ</CardTitle>
-                  <CardDescription>Hóa</CardDescription>
+                  <CardDescription>
+                    {realName[subjectName as keyof object]}
+                  </CardDescription>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -110,7 +128,7 @@ export default async function Dashboard() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </CardHeader>
-              {tableHoa.map((card, i) => {
+              {tableTin.map((card, i) => {
                 return (
                   <CardContent key={i}>
                     <MemoCard
@@ -128,6 +146,32 @@ export default async function Dashboard() {
           </div>
         </main>
       </div>
+    </>
+  );
+}
+
+export default async function Dashboard() {
+  const session = await auth();
+  const isLogin = !!session?.user;
+  if (!isLogin) {
+    return redirect("/api/auth/signin");
+  }
+
+  return (
+    <>
+      <NavbarAuth imageLink={session?.user?.image as string} />
+      <Tabs defaultValue="bad" className="w-full pt-12">
+        <TabsList className="flex justify-center gap-8">
+          <TabsTrigger value="bad">Mới học</TabsTrigger>
+          <TabsTrigger value="hard">Cần học lại</TabsTrigger>
+          <TabsTrigger value="good">Tốt</TabsTrigger>
+          <TabsTrigger value="easy">Dễ</TabsTrigger>
+        </TabsList>
+        <TabsContent value="bad">{await renderUi("hoa", "bad")}</TabsContent>
+        <TabsContent value="hard">{await renderUi("hoa", "hard")}</TabsContent>
+        <TabsContent value="good">{await renderUi("hoa", "good")}</TabsContent>
+        <TabsContent value="easy">{await renderUi("hoa", "easy")}</TabsContent>
+      </Tabs>
     </>
   );
 }

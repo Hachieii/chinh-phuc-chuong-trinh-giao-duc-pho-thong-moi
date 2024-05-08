@@ -1,0 +1,1 @@
+ALTER TABLE "memo" ADD COLUMN "state" varchar DEFAULT 'bad';

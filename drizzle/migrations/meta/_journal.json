@@ -134,6 +134,13 @@
       "when": 1713445369879,
       "tag": "0018_lowly_midnight",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "5",
+      "when": 1715205544447,
+      "tag": "0019_legal_thena",
+      "breakpoints": true
     }
   ]
 }

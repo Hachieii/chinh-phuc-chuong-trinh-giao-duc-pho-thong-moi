@@ -44,6 +44,7 @@ export const memo = pgTable("memo", {
   subject: varchar("subject", { length: 256 }).notNull(),
   title: varchar("title", { length: 256 }).notNull(),
   context: text("context"),
+  state: varchar("state").default("bad"),
   createdAt: timestamp("createdAt").defaultNow(),
 });
 

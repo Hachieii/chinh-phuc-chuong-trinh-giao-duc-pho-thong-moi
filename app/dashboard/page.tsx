@@ -180,7 +180,7 @@ export default async function Dashboard() {
                 <div className="grid gap-2">
                   <CardTitle>Thẻ nhớ</CardTitle>
                   <CardDescription>
-                    Những ghi nhớ gần đây đã lưu.
+                    Những ghi nhớ gần đây đã lưu (tối đa 5).
                   </CardDescription>
                 </div>
                 <DropdownMenu>
