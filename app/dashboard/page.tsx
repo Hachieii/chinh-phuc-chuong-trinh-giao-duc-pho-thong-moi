@@ -232,6 +232,7 @@ export default async function Dashboard() {
                       title={card.title as string}
                       context={card.context as string}
                       createdAt={card.createdAt as Date}
+                      haveFilter={false}
                     />
                   </CardContent>
                 );

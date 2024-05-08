@@ -118,6 +118,7 @@ export default async function Dashboard() {
                       subject={card.subject as string}
                       title={card.title as string}
                       context={card.context as string}
+                      haveFilter={true}
                       createdAt={card.createdAt as Date}
                     />
                   </CardContent>
