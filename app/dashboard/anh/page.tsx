@@ -67,7 +67,7 @@ export default async function Dashboard() {
             <Card className="xl:col-span-2">
               <CardHeader className="flex flex-row items-center">
                 <div className="grid gap-2">
-                  <CardTitle>Lưu trữ</CardTitle>
+                  <CardTitle>Thẻ nhớ</CardTitle>
                   <CardDescription>Anh</CardDescription>
                 </div>
                 <DropdownMenu>
