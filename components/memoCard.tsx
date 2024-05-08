@@ -58,8 +58,8 @@ export default function MemoCard({
     <>
       <Dialog>
         <Card>
-          <div className="flex justify-center">
-            <CardHeader className="min-w-[90%]">
+          <div className="flex justify-between">
+            <CardHeader className="w-full">
               <DialogTrigger>
                 <Card className="hover:bg-accent min-w-full">
                   <CardHeader className="">
