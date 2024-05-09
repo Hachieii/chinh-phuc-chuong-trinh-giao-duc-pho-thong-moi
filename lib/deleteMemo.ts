@@ -8,5 +8,7 @@ export default async function deleteMemo(id: string) {
   const session = await auth();
   if (!session?.user) return redirect("/api/auth/signin");
 
-  await db.delete(memo).where(eq(memo.id, id));
+  await db
+    .delete(memo)
+    .where(and(eq(memo.id, id), eq(memo.userId, session?.user?.id as string)));
 }

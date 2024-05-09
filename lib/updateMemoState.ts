@@ -15,7 +15,13 @@ export default async function updateState(
   await db
     .update(memo)
     .set({ state: newState })
-    .where(and(eq(memo.subject, subject), eq(memo.title, title)));
+    .where(
+      and(
+        eq(memo.subject, subject),
+        eq(memo.title, title),
+        eq(memo.userId, session?.user?.id as string)
+      )
+    );
 
   redirect(`/dashboard/${subject}`);
 }
