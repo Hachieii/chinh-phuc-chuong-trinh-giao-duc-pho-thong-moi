@@ -29,7 +29,8 @@ export default async function ChapterList({
     <>
       <div className="flex flex-col">
         <h2 className="font-bold text-4xl py-16">
-          {`${pref} ${nthChapter}: ${title}`}
+          {nthChapter != "#" && `${pref} ${nthChapter}: ${title}`}
+          {nthChapter == "#" && `${title}`}
         </h2>
         <div className="flex flex-wrap gap-6">
           {lessonList.map(async (lesson) => {
