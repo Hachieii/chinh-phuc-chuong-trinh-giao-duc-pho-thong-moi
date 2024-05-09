@@ -39,38 +39,45 @@ export default function Important({
         <Card className="border-solid py-6">
           <CardContent className="text-[20px]">{children}</CardContent>
           <CardFooter className="flex justify-end">
-            <form
-              action={async () => {
-                "use server";
-                await addNewMemo(subjectName, title, children as string);
-              }}
-            >
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <Button type="submit">
-                      <AlertDialog>
-                        <AlertDialogTrigger>
-                          <Save />
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>{title}</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              {children}
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogAction>Xác nhận</AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Thêm vào mục lưu trữ</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </form>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <Button>
+                        <Save />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>{title}</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          {children}
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Hủy</AlertDialogCancel>
+                        <form
+                          action={async () => {
+                            "use server";
+                            await addNewMemo(
+                              subjectName,
+                              title,
+                              children as string
+                            );
+                          }}
+                        >
+                          <AlertDialogAction type="submit">
+                            Lưu
+                          </AlertDialogAction>
+                        </form>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </TooltipTrigger>
+                <TooltipContent>Tạo thẻ nhớ</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </CardFooter>
         </Card>
       </div>
