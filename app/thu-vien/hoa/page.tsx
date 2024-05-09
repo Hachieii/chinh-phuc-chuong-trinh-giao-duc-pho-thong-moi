@@ -25,7 +25,7 @@ const data = [
         id: 1,
         nthLesson: "1",
         title: "Khái niệm về cân bằng hoá học",
-        context: "To do",
+        context: "",
         isDone: false,
         linkTo: "/thu-vien/hoa/khai-niem-ve-can-bang-hoa-hoc",
       },
