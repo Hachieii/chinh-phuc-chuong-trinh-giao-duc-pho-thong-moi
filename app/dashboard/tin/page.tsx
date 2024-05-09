@@ -152,27 +152,78 @@ async function renderUi(subjectName: string, state: string) {
   );
 }
 
+async function calCount(subject: string) {
+  const session = await auth();
+
+  const res = await db
+    .select({
+      state: memo.state,
+    })
+    .from(memo)
+    .where(
+      and(
+        eq(memo.userId, session?.user?.id as string),
+        eq(memo.subject, subject)
+      )
+    );
+
+  let count = {
+    bad: 0,
+    hard: 0,
+    good: 0,
+    easy: 0,
+  };
+
+  for (let i = 0; i < res.length; ++i) {
+    ++count[res[i].state as keyof object];
+  }
+
+  return count;
+}
+
 export default async function Dashboard() {
+  const subjectName = "tin";
   const session = await auth();
   const isLogin = !!session?.user;
   if (!isLogin) {
     return redirect("/api/auth/signin");
   }
+  const count = await calCount(subjectName);
 
   return (
     <>
       <NavbarAuth imageLink={session?.user?.image as string} />
       <Tabs defaultValue="bad" className="w-full pt-12">
         <TabsList className="flex justify-center gap-8">
-          <TabsTrigger value="bad">Mới học</TabsTrigger>
-          <TabsTrigger value="hard">Cần học lại</TabsTrigger>
-          <TabsTrigger value="good">Tốt</TabsTrigger>
-          <TabsTrigger value="easy">Dễ</TabsTrigger>
+          <TabsTrigger value="bad">{`Mới học(${
+            count["bad" as keyof object]
+          })`}</TabsTrigger>
+          <TabsTrigger value="hard">{`Cần học lại(${
+            count["hard" as keyof object]
+          })`}</TabsTrigger>
+          <TabsTrigger value="good">{`Tốt(${
+            count["good" as keyof object]
+          })`}</TabsTrigger>
+          <TabsTrigger value="easy">{`Dễ(${
+            count["easy" as keyof object]
+          })`}</TabsTrigger>
+
+          {/* <TabsTrigger value="hard"></TabsTrigger>
+          <TabsTrigger value="good"></TabsTrigger>
+          <TabsTrigger value="easy"></TabsTrigger> */}
         </TabsList>
-        <TabsContent value="bad">{await renderUi("tin", "bad")}</TabsContent>
-        <TabsContent value="hard">{await renderUi("tin", "hard")}</TabsContent>
-        <TabsContent value="good">{await renderUi("tin", "good")}</TabsContent>
-        <TabsContent value="easy">{await renderUi("tin", "easy")}</TabsContent>
+        <TabsContent value="bad">
+          {await renderUi(subjectName, "bad")}
+        </TabsContent>
+        <TabsContent value="hard">
+          {await renderUi(subjectName, "hard")}
+        </TabsContent>
+        <TabsContent value="good">
+          {await renderUi(subjectName, "good")}
+        </TabsContent>
+        <TabsContent value="easy">
+          {await renderUi(subjectName, "easy")}
+        </TabsContent>
       </Tabs>
     </>
   );
