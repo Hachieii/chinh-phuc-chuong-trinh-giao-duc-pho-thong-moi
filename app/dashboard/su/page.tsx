@@ -39,6 +39,7 @@ async function getMemo(name: string, state: string) {
       title: memo.title,
       context: memo.context,
       createdAt: memo.createdAt,
+      state: memo.state,
     })
     .from(memo)
     .where(
@@ -138,6 +139,7 @@ async function renderUi(subjectName: string, state: string) {
                       context={card.context as string}
                       createdAt={card.createdAt as Date}
                       haveFilter={true}
+                      state={card.state as string}
                     />
                   </CardContent>
                 );

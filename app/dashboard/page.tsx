@@ -58,6 +58,7 @@ async function getMemo() {
       title: memo.title,
       context: memo.context,
       createdAt: memo.createdAt,
+      state: memo.state,
     })
     .from(memo)
     .where(
@@ -233,6 +234,7 @@ export default async function Dashboard() {
                       context={card.context as string}
                       createdAt={card.createdAt as Date}
                       haveFilter={false}
+                      state={card.state as string}
                     />
                   </CardContent>
                 );

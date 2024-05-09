@@ -42,6 +42,7 @@ export default function MemoCard({
   context,
   createdAt,
   haveFilter,
+  state,
 }: {
   id: string;
   subject: string;
@@ -49,6 +50,7 @@ export default function MemoCard({
   context: string;
   createdAt: Date;
   haveFilter: boolean;
+  state: string;
 }) {
   const subjectName = {
     toan: "Toán",
@@ -103,7 +105,7 @@ export default function MemoCard({
                       action={async () => {
                         "use server";
                         await deleteMemo(id);
-                        redirect("/dashboard");
+                        redirect(`/dashboard/${subject}`);
                       }}
                     >
                       <AlertDialogCancel>Hủy</AlertDialogCancel>
@@ -130,7 +132,19 @@ export default function MemoCard({
                     await updateState(subject, title, "bad");
                   }}
                 >
-                  <AlertDialogAction type="submit">Mới học</AlertDialogAction>
+                  {state != "bad" && (
+                    <AlertDialogAction
+                      type="submit"
+                      className="bg-accent text-foreground hover:text-background"
+                    >
+                      Mới học
+                    </AlertDialogAction>
+                  )}
+                  {state == "bad" && (
+                    <AlertDialogAction type="submit" className="">
+                      <div className="">Mới học</div>
+                    </AlertDialogAction>
+                  )}
                 </form>
 
                 <form
@@ -139,9 +153,19 @@ export default function MemoCard({
                     await updateState(subject, title, "hard");
                   }}
                 >
-                  <AlertDialogAction type="submit">
-                    Cần học lại
-                  </AlertDialogAction>
+                  {state != "hard" && (
+                    <AlertDialogAction
+                      type="submit"
+                      className="bg-accent text-foreground hover:text-background"
+                    >
+                      Cần học lại
+                    </AlertDialogAction>
+                  )}
+                  {state == "hard" && (
+                    <AlertDialogAction type="submit" className="">
+                      <div className="">Cần học lại</div>
+                    </AlertDialogAction>
+                  )}
                 </form>
 
                 <form
@@ -150,7 +174,19 @@ export default function MemoCard({
                     await updateState(subject, title, "good");
                   }}
                 >
-                  <AlertDialogAction type="submit">Tốt</AlertDialogAction>
+                  {state != "good" && (
+                    <AlertDialogAction
+                      type="submit"
+                      className="bg-accent text-foreground hover:text-background"
+                    >
+                      Tốt
+                    </AlertDialogAction>
+                  )}
+                  {state == "good" && (
+                    <AlertDialogAction type="submit" className="">
+                      <div className="">Tốt</div>
+                    </AlertDialogAction>
+                  )}
                 </form>
 
                 <form
@@ -159,8 +195,21 @@ export default function MemoCard({
                     await updateState(subject, title, "easy");
                   }}
                 >
-                  <AlertDialogAction type="submit">Dễ</AlertDialogAction>
+                  {state != "easy" && (
+                    <AlertDialogAction
+                      type="submit"
+                      className="bg-accent text-foreground hover:text-background"
+                    >
+                      Dễ
+                    </AlertDialogAction>
+                  )}
+                  {state == "easy" && (
+                    <AlertDialogAction type="submit" className="">
+                      <div className="">Dễ</div>
+                    </AlertDialogAction>
+                  )}
                 </form>
+                <AlertDialogCancel>Hủy</AlertDialogCancel>
               </AlertDialogFooter>
             </div>
           </AlertDialogContent>
